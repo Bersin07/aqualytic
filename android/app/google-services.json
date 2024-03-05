@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "853694837737",
+    "project_id": "aqualytic-8d636",
+    "storage_bucket": "aqualytic-8d636.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:853694837737:android:a5976e93faca2014c79178",
+        "android_client_info": {
+          "package_name": "com.example.aqualytic"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPbgO4LmXdTngI6BrTQxH1TO7afeCX0CE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
