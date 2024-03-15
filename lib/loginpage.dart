@@ -20,13 +20,18 @@ class _LoginPageState extends State<LoginPage> {
 
   //sign user in
   void signUserIn()async{
+    
+
 
   //show loading circle
   showDialog(context:context, builder: (context){
     return const Center(
       child: CircularProgressIndicator(),
     );
+    
   },
+
+  
 );
   
 
@@ -198,9 +203,7 @@ class _LoginPageState extends State<LoginPage> {
                  
                   //facebook
                   SquareTitle(
-                    onTap: () {
-                      
-                    },
+                    onTap: () => AuthService1().signInWithFacebook(),
                     imagePath: 'lib/images/facebook.png'
                     ),
           

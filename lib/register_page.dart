@@ -202,9 +202,7 @@ class _RegisterPageState extends State<RegisterPage> {
                  
                   //facebook
                   SquareTitle(
-                    onTap: () {
-                      
-                    },
+                    onTap: ()=> AuthService1().signInWithFacebook(),
                     imagePath: 'lib/images/facebook.png'
                     ),
           
