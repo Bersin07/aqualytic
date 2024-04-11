@@ -40,6 +40,7 @@ dependencies:
   firebase_auth: ^4.17.6
   google_sign_in: ^6.2.1
   flutter_facebook_auth: ^6.1.1
+  lottie: ^3.1.0
 
 
 dev_dependencies:
