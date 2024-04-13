@@ -1,6 +1,7 @@
 // doctor_details_page.dart
 
 import 'package:flutter/material.dart';
+import 'delivery_details_page.dart';
 
 class VendorDetailsPage extends StatelessWidget {
   final String doctorImagePath;
@@ -48,7 +49,20 @@ class VendorDetailsPage extends StatelessWidget {
             SizedBox(height: 24),
             ElevatedButton(
               onPressed: () {
-                // Add functionality to book the doctor
+                // Navigate to the DeliveryDetailsPage to book the vendor
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DeliveryDetailsPage()),
+                ).then((value) {
+                  // This code block executes when the DeliveryDetailsPage pops,
+                  // meaning the order was successfully placed.
+                  if (value == true) {
+                    // Show a confirmation message
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Order placed successfully!')),
+                    );
+                  }
+                });
               },
               child: Text('Book Now'),
             ),

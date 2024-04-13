@@ -3,6 +3,7 @@ import 'package:aqualytic/components/doctor_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'vendor_list_page.dart';
 import 'vendor_details_page.dart';
+import 'services_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lottie/lottie.dart';
@@ -16,6 +17,23 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final user = FirebaseAuth.instance.currentUser!;
+  String _userName = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _extractUserName();
+  }
+
+  void _extractUserName() {
+    // Extracting username from email address
+    if (user.email != null) {
+      _userName = user.email!.split('@')[0];
+    } else {
+      // Handle case where email is null
+      _userName = 'User';
+    }
+  }
 
 //sign user out
   void signUserOut() {
@@ -38,6 +56,16 @@ class _HomePageState extends State<HomePage> {
           doctorProfession: doctorProfession,
           doctorRating: doctorRating,
         ),
+      ),
+    );
+  }
+
+  // Function to navigate to ServicesPage
+  void _navigateToServicesPage(String categoryName) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ServicesPage(categoryName: categoryName),
       ),
     );
   }
@@ -75,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                         height: 5,
                       ),
                       Text(
-                        'Bersin B',
+                        _userName,
                         style: TextStyle(
                             fontSize: 24, fontWeight: FontWeight.bold),
                       )
@@ -182,28 +210,48 @@ class _HomePageState extends State<HomePage> {
               height: 25,
             ),
 
-            //horizontal list view -> categories surgeon
+            //horizontal list view -> categories
             Container(
               height: 80,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  categoryCard(
-                    categoryName: 'Water',
-                    iconImagePath: 'lib/icons/drop.png',
+                  GestureDetector(
+                    onTap: () {
+                      _navigateToServicesPage('Water');
+                    },
+                    child: categoryCard(
+                      categoryName: 'Water',
+                      iconImagePath: 'lib/icons/drop.png',
+                    ),
                   ),
-                  categoryCard(
-                    categoryName: 'Lorry-Water',
-                    iconImagePath: 'lib/icons/truck.png',
+                  GestureDetector(
+                    onTap: () {
+                      _navigateToServicesPage('Lorry-Water');
+                    },
+                    child: categoryCard(
+                      categoryName: 'Lorry-Water',
+                      iconImagePath: 'lib/icons/truck.png',
+                    ),
                   ),
-                  categoryCard(
-                    categoryName: 'Water-Quality',
-                    iconImagePath: 'lib/icons/quality.png',
+                  GestureDetector(
+                    onTap: () {
+                      _navigateToServicesPage('Water-Quality');
+                    },
+                    child: categoryCard(
+                      categoryName: 'Water-Quality',
+                      iconImagePath: 'lib/icons/quality.png',
+                    ),
                   ),
-                  categoryCard(
-                    categoryName: 'Waste-water',
-                    iconImagePath: 'lib/icons/waste-water.png',
-                  )
+                  GestureDetector(
+                    onTap: () {
+                      _navigateToServicesPage('Waste-water');
+                    },
+                    child: categoryCard(
+                      categoryName: 'Waste-water',
+                      iconImagePath: 'lib/icons/waste-water.png',
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -255,14 +303,14 @@ class _HomePageState extends State<HomePage> {
                     onTap: () {
                       _navigateToDoctorDetailsPage(
                         'lib/images/doctor1.jpg',
-                        'Doctor 1',
+                        'Vendor 1',
                         'Specialization',
                         '4.5',
                       );
                     },
                     child: doctorCard(
                       doctorImagePath: 'lib/images/doctor1.jpg',
-                      doctorName: 'Doctor 1',
+                      doctorName: 'Vendor 1',
                       doctorProfession: 'Specialization',
                       doctorRating: '4.5',
                     ),
@@ -272,14 +320,14 @@ class _HomePageState extends State<HomePage> {
                     onTap: () {
                       _navigateToDoctorDetailsPage(
                         'lib/images/doctor2.jpg',
-                        'Doctor 2',
+                        'Vendor 2',
                         'Specialization',
                         '4.7',
                       );
                     },
                     child: doctorCard(
                       doctorImagePath: 'lib/images/doctor2.jpg',
-                      doctorName: 'Doctor 2',
+                      doctorName: 'Vendor 2',
                       doctorProfession: 'Specialization',
                       doctorRating: '4.7',
                     ),
@@ -289,14 +337,14 @@ class _HomePageState extends State<HomePage> {
                     onTap: () {
                       _navigateToDoctorDetailsPage(
                         'lib/images/doctor3.jpg',
-                        'Doctor 3',
+                        'Vendor 3',
                         'Specialization',
                         '4.8',
                       );
                     },
                     child: doctorCard(
                       doctorImagePath: 'lib/images/doctor3.jpg',
-                      doctorName: 'Doctor 3',
+                      doctorName: 'Vendor 3',
                       doctorProfession: 'Specialization',
                       doctorRating: '4.8',
                     ),
