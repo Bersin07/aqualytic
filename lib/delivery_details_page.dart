@@ -1,5 +1,6 @@
 // delivery_details_page.dart
 
+import 'package:aqualytic/YourOrdersPage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,6 +16,8 @@ class _DeliveryDetailsPageState extends State<DeliveryDetailsPage> {
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _landmarkController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
+  
+
 
   final _formKey = GlobalKey<FormState>();
 
@@ -38,6 +41,12 @@ class _DeliveryDetailsPageState extends State<DeliveryDetailsPage> {
         // Show confirmation message or animation
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Order placed successfully!')),
+        );
+
+        // Navigate to "Your Orders" page
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => YourOrdersPage()),
         );
       }
     } catch (error) {

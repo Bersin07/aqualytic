@@ -24,6 +24,10 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def lottieVersion = "3.4.0" 
+
+
+
 android {
     namespace "com.example.aqualytic"
     compileSdkVersion flutter.compileSdkVersion
@@ -68,4 +72,5 @@ flutter {
 
 dependencies {
     implementation platform('com.google.firebase:firebase-bom:32.7.4')
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 }

@@ -1,5 +1,8 @@
+import 'package:aqualytic/TrackOrderPage.dart';
+import 'package:aqualytic/YourOrdersPage.dart';
 import 'package:aqualytic/components/category_card.dart';
 import 'package:aqualytic/components/doctor_card.dart';
+import 'package:aqualytic/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'vendor_list_page.dart';
 import 'vendor_details_page.dart';
@@ -18,6 +21,37 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final user = FirebaseAuth.instance.currentUser!;
   String _userName = '';
+  int _currentIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+    switch (index) {
+    case 1:
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => ProfilePage()),
+      );
+      break;
+    case 2:
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => YourOrdersPage()),
+      );
+      break;
+    case 3:
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => TrackOrderPage()),
+      );
+      break;
+    default:
+      // Handle other cases if needed
+      break;
+  }
+
+  }
 
   @override
   void initState() {
@@ -78,6 +112,31 @@ class _HomePageState extends State<HomePage> {
         actions: [IconButton(onPressed: signUserOut, icon: Icon(Icons.logout))],
       ),
       backgroundColor: Colors.blue[50],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: _onItemTapped,
+        backgroundColor: Colors.blue,
+// Change bottom navigation bar color
+        selectedItemColor: Colors.blue,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
+            label: 'Your Orders',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.track_changes),
+            label: 'Track Order',
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Column(
           children: [
