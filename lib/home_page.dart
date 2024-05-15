@@ -23,34 +23,36 @@ class _HomePageState extends State<HomePage> {
   String _userName = '';
   int _currentIndex = 0;
 
+
+  
+
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
     switch (index) {
-    case 1:
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => ProfilePage()),
-      );
-      break;
-    case 2:
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => YourOrdersPage()),
-      );
-      break;
-    case 3:
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => TrackOrderPage()),
-      );
-      break;
-    default:
-      // Handle other cases if needed
-      break;
-  }
-
+      case 1:
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => ProfilePage()),
+        );
+        break;
+      case 2:
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => YourOrdersPage()),
+        );
+        break;
+      case 3:
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => TrackOrderPage()),
+        );
+        break;
+      default:
+        // Handle other cases if needed
+        break;
+    }
   }
 
   @override
@@ -115,9 +117,10 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: _onItemTapped,
-        backgroundColor: Colors.blue,
-// Change bottom navigation bar color
-        selectedItemColor: Colors.blue,
+        backgroundColor: Colors.white, // Set background color to white
+        selectedItemColor: Colors.blue, // Set selected item color to blue
+        unselectedItemColor:
+            Colors.grey, // Optionally set unselected item color
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -225,17 +228,31 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(
                             height: 12,
                           ),
-                          Container(
-                            padding: EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                                color: Colors.deepPurple[300],
-                                borderRadius: BorderRadius.circular(12)),
-                            child: Center(
-                              child: Text(
-                                'Get started',
-                              ),
-                            ),
-                          )
+                          Padding(
+        padding: EdgeInsets.all(12),
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => VendorListPage()),
+            );
+          },  
+           style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.all(0), backgroundColor: Colors.blue[50], // No padding inside the ElevatedButton
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ), // Button background color
+          ),
+          child: Container(
+            width: double.infinity,
+            padding: EdgeInsets.all(12), // Padding inside the Container
+            child: Center(
+              child: Text(
+                'Get started',
+                style: TextStyle(fontSize: 16),
+              ),            ),
+          ),
+        ),)
                         ],
                       ),
                     )
@@ -361,14 +378,14 @@ class _HomePageState extends State<HomePage> {
                   GestureDetector(
                     onTap: () {
                       _navigateToDoctorDetailsPage(
-                        'lib/images/doctor1.png',
+                        'lib/images/vendor1.png',
                         'Vendor 1',
                         'Specialization',
                         '4.5',
                       );
                     },
                     child: doctorCard(
-                      doctorImagePath: 'lib/images/doctor1.png',
+                      doctorImagePath: 'lib/images/vendor1.png',
                       doctorName: 'Vendor 1',
                       doctorProfession: 'Specialization',
                       doctorRating: '4.5',
@@ -378,14 +395,14 @@ class _HomePageState extends State<HomePage> {
                   GestureDetector(
                     onTap: () {
                       _navigateToDoctorDetailsPage(
-                        'lib/images/doctor2.png',
+                        'lib/images/vendor2.png',
                         'Vendor 2',
                         'Specialization',
                         '4.7',
                       );
                     },
                     child: doctorCard(
-                      doctorImagePath: 'lib/images/doctor2.png',
+                      doctorImagePath: 'lib/images/vendor2.png',
                       doctorName: 'Vendor 2',
                       doctorProfession: 'Specialization',
                       doctorRating: '4.7',
@@ -395,14 +412,14 @@ class _HomePageState extends State<HomePage> {
                   GestureDetector(
                     onTap: () {
                       _navigateToDoctorDetailsPage(
-                        'lib/images/doctor3.png',
+                        'lib/images/vendor3.png',
                         'Vendor 3',
                         'Specialization',
                         '4.8',
                       );
                     },
                     child: doctorCard(
-                      doctorImagePath: 'lib/images/doctor3.png',
+                      doctorImagePath: 'lib/images/vendor3.png',
                       doctorName: 'Vendor 3',
                       doctorProfession: 'Specialization',
                       doctorRating: '4.8',

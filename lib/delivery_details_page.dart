@@ -1,6 +1,7 @@
 // delivery_details_page.dart
 
 import 'package:aqualytic/YourOrdersPage.dart';
+import 'package:aqualytic/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,51 +17,48 @@ class _DeliveryDetailsPageState extends State<DeliveryDetailsPage> {
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _landmarkController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
-  
-
 
   final _formKey = GlobalKey<FormState>();
 
   void _placeOrder() async {
-  if (_formKey.currentState!.validate()) {
-    try {
-      final currentUser = FirebaseAuth.instance.currentUser;
-      if (currentUser != null) {
-        final userId = currentUser.uid;
+    if (_formKey.currentState!.validate()) {
+      try {
+        final currentUser = FirebaseAuth.instance.currentUser;
+        if (currentUser != null) {
+          final userId = currentUser.uid;
 
-        await FirebaseFirestore.instance.collection('orders').add({
-          'userId': userId,
-          'address': _addressController.text,
-          'pincode': _pincodeController.text,
-          'city': _cityController.text,
-          'landmark': _landmarkController.text,
-          'name': _nameController.text,
-          'timestamp': DateTime.now(),
-        });
+          await FirebaseFirestore.instance.collection('orders').add({
+            'userId': userId,
+            'address': _addressController.text,
+            'pincode': _pincodeController.text,
+            'city': _cityController.text,
+            'landmark': _landmarkController.text,
+            'name': _nameController.text,
+            'timestamp': DateTime.now(),
+          });
 
-        // Show confirmation message or animation
+          // Show confirmation message or animation
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Order placed successfully!')),
+          );
+
+          // Navigate to "Your Orders" page
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => YourOrdersPage()),
+          );
+        }
+      } catch (error) {
+        // Handle error
+        print('Error placing order: $error');
+        // Show error message to user
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Order placed successfully!')),
-        );
-
-        // Navigate to "Your Orders" page
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => YourOrdersPage()),
+          SnackBar(
+              content: Text('Error placing order. Please try again later.')),
         );
       }
-    } catch (error) {
-      // Handle error
-      print('Error placing order: $error');
-      // Show error message to user
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error placing order. Please try again later.')),
-      );
     }
   }
-}
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +124,11 @@ class _DeliveryDetailsPageState extends State<DeliveryDetailsPage> {
               ),
               SizedBox(height: 20),
               ElevatedButton(
-                onPressed: _placeOrder,
+                onPressed: () {
+                  _placeOrder();
+                  Navigator.push(context,
+                      paymentPageRoute()); // Navigate to the payment page
+                },
                 child: Text('Order Now'),
               ),
             ],
