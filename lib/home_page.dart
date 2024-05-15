@@ -361,14 +361,14 @@ class _HomePageState extends State<HomePage> {
                   GestureDetector(
                     onTap: () {
                       _navigateToDoctorDetailsPage(
-                        'lib/images/doctor1.jpg',
+                        'lib/images/doctor1.png',
                         'Vendor 1',
                         'Specialization',
                         '4.5',
                       );
                     },
                     child: doctorCard(
-                      doctorImagePath: 'lib/images/doctor1.jpg',
+                      doctorImagePath: 'lib/images/doctor1.png',
                       doctorName: 'Vendor 1',
                       doctorProfession: 'Specialization',
                       doctorRating: '4.5',
@@ -378,14 +378,14 @@ class _HomePageState extends State<HomePage> {
                   GestureDetector(
                     onTap: () {
                       _navigateToDoctorDetailsPage(
-                        'lib/images/doctor2.jpg',
+                        'lib/images/doctor2.png',
                         'Vendor 2',
                         'Specialization',
                         '4.7',
                       );
                     },
                     child: doctorCard(
-                      doctorImagePath: 'lib/images/doctor2.jpg',
+                      doctorImagePath: 'lib/images/doctor2.png',
                       doctorName: 'Vendor 2',
                       doctorProfession: 'Specialization',
                       doctorRating: '4.7',
@@ -395,14 +395,14 @@ class _HomePageState extends State<HomePage> {
                   GestureDetector(
                     onTap: () {
                       _navigateToDoctorDetailsPage(
-                        'lib/images/doctor3.jpg',
+                        'lib/images/doctor3.png',
                         'Vendor 3',
                         'Specialization',
                         '4.8',
                       );
                     },
                     child: doctorCard(
-                      doctorImagePath: 'lib/images/doctor3.jpg',
+                      doctorImagePath: 'lib/images/doctor3.png',
                       doctorName: 'Vendor 3',
                       doctorProfession: 'Specialization',
                       doctorRating: '4.8',
